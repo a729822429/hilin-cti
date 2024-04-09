@@ -1,0 +1,10 @@
+icu.hilin.freeswitch:
+  enabled: true
+  host: 192.168.2.20
+  port: 8021
+  password: ClueCon
+  timeout: 10
+  heartbeatExpire: 30
+logging:
+  level:
+    "icu.hilin.cti.freeswitch.handler.biz.listener": warn

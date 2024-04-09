@@ -13,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class ChannelAnswerListener extends AbsEslEventListener {
     private final IEventHandler iEventHandler;
-    private final FsClient fsClient;
 
     @Override
     public boolean shouldDeal(HilinEslEvent eslEvent) {

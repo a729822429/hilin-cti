@@ -6,6 +6,7 @@ import icu.hilin.cti.freeswitch.client.inbound.FsClient;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,7 +21,7 @@ public class ExtensionNumberCmd extends BaseCmd {
 
     public ExtensionNumber get(String number) {
 
-        List<String> msgs = exetQueryCommand("list_users", number);
+        List<String> msgs = exetQueryCommand("list_users user", number);
         if (msgs == null) {
             return null;
         }
@@ -28,14 +29,13 @@ public class ExtensionNumberCmd extends BaseCmd {
     }
 
 
-    public ExtensionNumber getAll() {
+    public List<ExtensionNumber> getAll() {
 
         List<String> msgs = FsClient.getFsClient().sendSyncApiCommand("list_users", "").getBodyLines();
         if (msgs == null) {
             return null;
         }
-        ExtensionNumber extensionNumber = new ExtensionNumber();
-        return msgs.stream().map(this::getUser).filter(Objects::nonNull).findFirst().get();
+        return msgs.stream().map(this::getUser).filter(Objects::nonNull).toList();
     }
 
     private ExtensionNumber getUser(String userStr) {

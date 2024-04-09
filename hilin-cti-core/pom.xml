@@ -17,5 +17,9 @@
             <artifactId>freeswitch-esl</artifactId>
             <version>0.9.2</version>
         </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-json</artifactId>
+        </dependency>
     </dependencies>
 </project>

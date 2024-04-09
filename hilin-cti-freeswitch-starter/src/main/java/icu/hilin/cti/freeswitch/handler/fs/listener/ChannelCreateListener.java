@@ -23,7 +23,6 @@ import java.util.Date;
 public class ChannelCreateListener extends AbsEslEventListener {
 
     private final IEventHandler iEventHandler;
-    private final FsClient fsClient;
 
     @Override
     public boolean shouldDeal(HilinEslEvent eslEvent) {

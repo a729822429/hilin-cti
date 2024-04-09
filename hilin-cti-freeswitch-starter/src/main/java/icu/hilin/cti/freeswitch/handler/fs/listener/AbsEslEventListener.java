@@ -42,17 +42,13 @@ public abstract class AbsEslEventListener {
      * @param eslEvent
      */
     public void doEvent(HilinEslEvent eslEvent) {
-        log.info("处理事件{} legId:{} ani:{} dni:{}", eslEvent.getEventName(), eslEvent.getANI(), eslEvent.getDNI(), eslEvent.getLegId());
+        log.info("处理事件{} legId:{} ani:{} dni:{}", eslEvent.getEventName(), eslEvent.getLegId(), eslEvent.getANI(), eslEvent.getDNI());
         String ani = eslEvent.getANI();
 
-        // 如果是心跳，设置最后心跳时间，并不做事件处理
-        if (FsEventType.HEARTBEAT.name().equalsIgnoreCase(eslEvent.getEventName())) {
-            return;
-        }
-
+        // 如果是心跳，直接跳转到心跳处理类
         // 排除语音通知
         // 排除规则： 当主叫号码全是"0"，就认为是语音通知
-        if (ObjectUtil.isEmpty(ani.replace("0", ""))) {
+        if (!FsEventType.HEARTBEAT.name().equalsIgnoreCase(eslEvent.getEventName()) && ObjectUtil.isEmpty(ani.replace("0", ""))) {
             return;
         }
 
