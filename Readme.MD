@@ -1,5 +1,7 @@
 # hilin-cti软交换电话集成系统
 
+<img src="https://hilin.icu/img/hilin-logo.png">
+
 [1]: https://img.shields.io/badge/license-Apache2.0-brightgreen.svg?style=plastic
 
 [2]: /LICENSE
