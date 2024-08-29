@@ -14,7 +14,7 @@
 [![license][1]][2]
 [![Issue Welcome][3]][4]
 [![Release Version][5]][6]  
-端口转发项目，可通过web页面管理
+软交换电话集成系统
 
 ## 特点
 
