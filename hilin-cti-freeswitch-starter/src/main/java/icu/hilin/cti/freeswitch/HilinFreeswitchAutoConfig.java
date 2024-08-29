@@ -4,7 +4,7 @@ import cn.hutool.json.JSONUtil;
 import icu.hilin.cti.freeswitch.client.inbound.FsClient;
 import icu.hilin.cti.freeswitch.client.inbound.HilinEslListener;
 import icu.hilin.cti.freeswitch.client.inbound.cmd.ExtensionNumberCmd;
-import icu.hilin.cti.freeswitch.client.outbound.OBClient;
+import icu.hilin.cti.freeswitch.client.outbound.OutboundServer;
 import icu.hilin.cti.freeswitch.handler.biz.listener.DefaultEventHandler;
 import icu.hilin.cti.freeswitch.handler.biz.listener.IEventHandler;
 import icu.hilin.cti.freeswitch.handler.fs.listener.*;
@@ -73,8 +73,8 @@ public class HilinFreeswitchAutoConfig implements ApplicationRunner {
     }
 
     @Bean
-    public OBClient obClient() {
-        return new OBClient();
+    public OutboundServer obClient() {
+        return new OutboundServer();
     }
 
     private ExtensionNumberCmd extensionNumberCmd;

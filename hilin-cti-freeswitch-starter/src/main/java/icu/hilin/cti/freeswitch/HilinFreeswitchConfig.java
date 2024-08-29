@@ -7,12 +7,43 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "icu.hilin.freeswitch")
 public class HilinFreeswitchConfig {
 
-    private Boolean enabled = true;
+    private boolean enabled = true;
 
-    private String host;
-    private int port;
-    private String password;
-    private int timeout;
-    private long heartbeatExpire;
+    /**
+     * fs配置信息
+     */
+    private Server server;
+
+    /**
+     * inbound通道配置
+     */
+    private Inbound inbound;
+
+    /**
+     * outbound通道配置
+     */
+    private Outbound outbound;
+
+    @Data
+    public static class Server {
+        private String host;
+        private int port;
+        private String password;
+        private int timeout;
+        private long heartbeatExpire;
+    }
+
+    @Data
+    public static class Inbound {
+
+    }
+
+    @Data
+    public static class Outbound {
+        /**
+         * outbound通道监听的端口号
+         */
+        private int port = 8086;
+    }
 
 }

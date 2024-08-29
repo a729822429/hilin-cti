@@ -18,6 +18,7 @@
         <module>hilin-cti-freeswitch-starter</module>
         <module>freeswitch-esl</module>
         <module>hilin-cti-biz</module>
+        <module>hilin-cti-callcenter</module>
     </modules>
 
     <dependencyManagement>

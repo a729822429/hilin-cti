@@ -1,5 +1,6 @@
 package icu.hilin.cti.freeswitch.client.outbound;
 
+import icu.hilin.cti.freeswitch.HilinFreeswitchConfig;
 import org.freeswitch.esl.client.outbound.AbstractOutboundClientHandler;
 import org.freeswitch.esl.client.outbound.AbstractOutboundPipelineFactory;
 import org.freeswitch.esl.client.outbound.SocketClient;
@@ -9,14 +10,18 @@ import org.freeswitch.esl.client.transport.message.EslHeaders;
 import org.freeswitch.esl.client.transport.message.EslMessage;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelHandlerContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.stereotype.Component;
 
-public class OBClient implements ApplicationRunner {
+public class OutboundServer implements ApplicationRunner {
+
+    @Autowired
+    private HilinFreeswitchConfig hilinFreeswitchConfig;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        SocketClient obSocket = new SocketClient(8086, new AbstractOutboundPipelineFactory() {
+        SocketClient obSocket = new SocketClient(hilinFreeswitchConfig.getOutbound().getPort(), new AbstractOutboundPipelineFactory() {
             @Override
             protected AbstractOutboundClientHandler makeHandler() {
                 return new AbstractOutboundClientHandler() {
@@ -40,7 +45,7 @@ public class OBClient implements ApplicationRunner {
                         SendMsg bridgeMsg = new SendMsg();
                         bridgeMsg.addCallCommand("execute");
                         bridgeMsg.addExecuteAppName("bridge");
-                        bridgeMsg.addExecuteAppArg("user/" + destNumber);
+                        bridgeMsg.addExecuteAppArg("{HILIN_OTHER_LEG_UNIQUE_ID=" + event.getEventHeaders().get("Unique-ID") + "}user/" + destNumber);
 
                         //同步发送bridge命令接通
                         EslMessage response = sendSyncMultiLineCommand(channel, bridgeMsg.getMsgLines());
